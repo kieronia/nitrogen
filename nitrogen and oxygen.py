@@ -19,8 +19,7 @@ print(f"""
 """)
 
 while True:
-    if gift == "":
-        gift = "".join(choice(characters) for x in range(randint(24, 24))) #change 24,24 to 16,16 if the code changes idk gift code things
+    gift = "".join(choice(characters) for x in range(randint(24, 24))) if gift != "" else gift #change 24,24 to 16,16 if the code changes idk gift code things
     print(f"{Fore.CYAN}[?] Testing discord.gift/{gift.upper()}")
     r = requests.get(f"https://ptb.discordapp.com/api/v6/entitlements/gift-codes/{gift}")
     if r.status_code == 404:
