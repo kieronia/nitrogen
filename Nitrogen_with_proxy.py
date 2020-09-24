@@ -23,7 +23,9 @@ ua = UserAgent()
 collector = create_collector('my-collector', 'https')
 executor = ThreadPoolExecutor(max_workers=1000)
  
-
+# Speed of program:
+speedy = 1
+ 
 print(f"""
 {Fore.BLUE}        ___  __   __   __   ___                    __      __           __   ___  {Fore.CYAN}     
  |\ | |  |  |__) /  \ / _` |__  |\ |     /\  |\ | |  \    /  \ \_/ \ / / _` |__  |\ | 
@@ -87,7 +89,7 @@ async def recheck(gift, proxy):
             current_time = now.strftime("%H:%M:%S")
             print(f"{Fore.RED}[-] discord.gift/{gift.upper()} - Ratelimited - Skipping and Waiting 10 seconds | {current_time}")
             await failedcheckfilewrite(gift)
-            time.sleep(10)
+            time.sleep(speedy)
         elif r.status_code == 200: 
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
@@ -131,7 +133,7 @@ async def gen(proxy):
             now = datetime.now()
             current_time = now.strftime("%H:%M:%S")
             print(f"{Fore.RED}[-] discord.gift/{gift.upper()} - Ratelimited - Rechecking in 10 seconds | {current_time}")
-            time.sleep(10)
+            time.sleep(speedy)
             await recheck(gift, proxy)
         elif r.status_code == 200: 
             now = datetime.now()
@@ -163,4 +165,4 @@ async def gen(proxy):
 while True:
     loop = asyncio.get_event_loop()
     loop.run_until_complete(proxyfinder())
-    time.sleep(6)
+    time.sleep(speedy)
