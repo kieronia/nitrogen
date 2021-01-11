@@ -5,39 +5,23 @@ from colorama import init, Fore, Back, Style
 import os,threading
 import random
 
-
 init(convert=True)
 valid = 0
 invalid = 0
 
-
-characters = string.ascii_letters +  string.digits
- 
-
-
-
- 
-
-
-print(f"""
-{Fore.BLUE}        ___  __   __   __   ___                    __      __           __   ___  {Fore.CYAN}     
- |\ | |  |  |__) /  \ / _` |__  |\ |     /\  |\ | |  \    /  \ \_/ \ / / _` |__  |\ | 
-{Fore.BLUE} | \| |  |  |  \ \__/ \__> |___ | \|    /~~\ | \| |__/    \__/ / \  |  \__> |___ | \| {Fore.CYAN}
-                                                                                     
-""")         
+characters = string.ascii_letters + string.digits
+       
 lines = open('proxies.txt').read().splitlines()
-def title():
-    global valid
-    global invalid
-    while True:
-        os.system(f"title Kieronia's Nitro Gen Valid : [{valid}]  Invalid : [{invalid}]")
+
+threadcount = int(input(" > Number of threads?\n > "))
+proxytype = input(" > HTTP or HTTPS\n > ").lower()
 
 def nitro():
     global valid
     global invalid
     while True:
-        os.system(f"title Kieronia's Nitro Gen Valid : [{valid}]  Invalid : [{invalid}]") 
-        proxy =random.choice(lines)
+        print(f"title Kieronias Nitro Gen Valid : [{valid}]  Invalid : [{invalid}]") 
+        proxy = random.choice(lines)
         if proxytype == "https":
             proxies = {'https': 'https://%s' % (proxy)}
         elif proxytype == "http":
@@ -65,9 +49,6 @@ def nitro():
         except:
             pass
 
-threading.Thread(target = title).start()
-threadcount = int(input(" > Number of threads?\n > "))
-proxytype = input(" > HTTP or HTTPS\n > ").lower()
 for kieronia in range(threadcount):
     threading.Thread(target = nitro).start()
     time.sleep(0.1)
